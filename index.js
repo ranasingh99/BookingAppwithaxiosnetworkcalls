@@ -14,14 +14,27 @@ function saveTolocalStorage(e){
   
     // stringify the object
 
-    let customerDetails_serialized = JSON.stringify(customerDetails);
+   // let customerDetails_serialized = JSON.stringify(customerDetails);
 
     // store the object in localstorage
-    localStorage.setItem(customerDetails.emailId,customerDetails_serialized);
+    //localStorage.setItem(customerDetails.emailId,customerDetails_serialized);
 
     // calling the function so that details can be printed on screen
 
-    showUserOnScreen(customerDetails);
+   // showUserOnScreen(customerDetails);
+
+   //=====now store the data on cloud using network calls=======//
+
+   // 1) sending the data over the cloud using PUT  request
+
+   axios.post('https://crudcrud.com/api/7270365647cf46599c73a15b8ed073b9/appointmentData',customerDetails)
+   .then((response)=>{
+    showUserOnScreen(response.data);
+    console.log(response.data);
+   })
+   .catch((error)=>{
+    console.log(error);
+   })
 }
 
 // making a seperate function to show the details on screen
