@@ -82,7 +82,17 @@ function showUserOnScreen(cus_obj){
     deleteButton.onclick = ()=>{
 
         // removing from the local storage
-        localStorage.removeItem(cus_obj.emailId);
+       // localStorage.removeItem(cus_obj.emailId);
+
+       //===================deleteing from the crucrud using DELETE request=======
+
+       axios.delete(`https://crudcrud.com/api/7270365647cf46599c73a15b8ed073b9/appointmentData/${cus_obj._id}`)
+       .then((res)=>{
+        console.log('object deleted');
+       })
+       .catch((err)=>{
+        console.log('something went wrong');
+       })
 
         // removing from the dom
 
