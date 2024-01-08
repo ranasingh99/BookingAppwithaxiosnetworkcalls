@@ -102,7 +102,14 @@ function showUserOnScreen(cus_obj){
 
     editButton.onclick =()=>{
         // removing the previous stored value from localstorage
-        localStorage.removeItem(cus_obj.emailId);
+       // localStorage.removeItem(cus_obj.emailId);
+       axios.put(`https://crudcrud.com/api/7270365647cf46599c73a15b8ed073b9/appointmentData/${cus_obj._id}/${cus_obj.name}`)
+       .then((res)=>{
+        console.log(res);
+       })
+       .catch((err)=>{
+        console.log(err);
+       })
 
         // removing from the dom 
 
