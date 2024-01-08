@@ -11,17 +11,6 @@ function saveTolocalStorage(e){
         emailId:customerEmail,
         time:cus_callTime
     }
-  
-    // stringify the object
-
-   // let customerDetails_serialized = JSON.stringify(customerDetails);
-
-    // store the object in localstorage
-    //localStorage.setItem(customerDetails.emailId,customerDetails_serialized);
-
-    // calling the function so that details can be printed on screen
-
-   // showUserOnScreen(customerDetails);
 
    //=====now store the data on cloud using network calls=======//
 
@@ -30,14 +19,33 @@ function saveTolocalStorage(e){
    axios.post('https://crudcrud.com/api/7270365647cf46599c73a15b8ed073b9/appointmentData',customerDetails)
    .then((response)=>{
     showUserOnScreen(response.data);
-    console.log(response.data);
+    //console.log(response.data);
    })
    .catch((error)=>{
-    console.log(error);
-   })
+    document.body.innerHTML = document.body.innerHTML + `<h3 style = "color:red;">Error code:404 - Something went wrong</h3>`
+   });
+  
 }
+// Adding  the button showlist and heading
+
+let buttonshowList = document.getElementById('showList');
+let headingList = document.getElementById('listheading');
+
+headingList.appendChild(buttonshowList);
 
 // making a seperate function to show the details on screen
+
+function showDetails(){
+    axios.get('https://crudcrud.com/api/7270365647cf46599c73a15b8ed073b9/appointmentData')
+    .then((res)=>{
+        for(var i =0;i<res.data.length;i++){
+            showUserOnScreen(res.data[i]);
+        }
+    })
+    .catch((err)=>{
+        document.body.innerHTML = document.body.innerHTML + `<h3>Something went wrong</h3>`
+    });
+}
 
 function showUserOnScreen(cus_obj){
 
